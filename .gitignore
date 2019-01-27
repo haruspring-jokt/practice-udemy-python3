@@ -114,3 +114,12 @@ dmypy.json
 .pyre/
 
 .idea/
+
+# sqlite
+*.db
+
+/sec_12/data/
+*.bak
+*.dir
+*.dat
+*.pickle
