@@ -2,19 +2,48 @@ import sec_14.calculation as calculation
 import pytest
 
 # pytestの場合はtest_で始まるメソッドはテストとして認識する
-def test_add_num_and_double():
-    cal = calculation.Cal()
-    # assert文がテストケースとして機能する
-    assert cal.add_num_and_double(1, 1) == 4
+# def test_add_num_and_double():
+#     cal = calculation.Cal()
+#     # assert文がテストケースとして機能する
+#     assert cal.add_num_and_double(1, 1) == 4
+
+is_release = True
+
 
 # テストクラスを作成し、その中でテストケースを書くことも可能
 class TestCal(object):
+
+    # クラスに対するsetup
+    @classmethod
+    def setup_class(cls):
+        print('start')
+        cls.cal = calculation.Cal()
+
+    # クラスに対するteardown
+    @classmethod
+    def teardown_class(cls):
+        print('end')
+        del cls.cal
+
+    # テストメソッド開始前
+    # methodを引数に追加し利用できる
+    def setup_method(self, method):
+        print(f'method={method.__name__}')
+
+    # テストメソッド終了後
+    def teardown_method(self, method):
+        print(f'method={method.__name__}')
+
+    # pytest
     def test_add_num_and_double(self):
         cal = calculation.Cal()
         # assert文がテストケースとして機能する
         assert cal.add_num_and_double(1, 1) == 4
 
     # 例外のpytest
+    # @pytest.mark.skip(reason='hogehoge') # skip
+    @pytest.mark.skipif(is_release is True,
+                        reason='is_release')  # 条件付きskip
     def test_add_num_and_double_raise(self):
         # pytest.raises(Error)を使用する
         with pytest.raises(ValueError):
