@@ -123,3 +123,4 @@ dmypy.json
 *.dir
 *.dat
 *.pickle
+/.vagrant/

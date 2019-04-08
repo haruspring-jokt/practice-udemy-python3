@@ -42,6 +42,13 @@ class TestSalary(unittest.TestCase):
             self.assertEqual(salary_price, 101)
             mock_bonus.assert_called()
 
+    def setUp(self):
+        self.patcher = mock.patch('salary.ThirdPartyBonusRestApi.bonus_price')
+        self.mock_bonus = self.patcher.start()
+
+    def tearDown(self):
+        self.patcher.stop()
+
     def test_calculation_salary_patch_pathcer(self):
         patcher = mock.patch('sec_14_mock.salary.ThirdPartyBonusRestApi.bonus_price')
         mock_bonus = patcher.start()
@@ -52,4 +59,16 @@ class TestSalary(unittest.TestCase):
 
         self.assertEqual(salary_price, 101)
         mock_bonus.assert_called()
-        patcher.stop()
+        # patcher.stop()
+
+    def test_calculation_salary_patch_side_effect(self):
+        # def f(year):
+        #     return 1
+
+        self.mock_bonus.side_effect = lambda year: 1
+
+        s = salary.Salary(year=2017)
+        salary_price = s.calculation_salary()
+
+        self.assertEqual(salary_price, 101)
+        # self.mock_bonus.assert_called()
