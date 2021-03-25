@@ -54,7 +54,7 @@ pytest-forked==1.0.2
 pytest-xdist==1.26.1
 python-dateutil==2.8.0
 -e git+https://github.com/haruspring-jokt/practice-udemy-python3.git@6b52b4126afc277de517997f72f97dde58488641#egg=python_programming_demo_app&subdirectory=python_programming_demo_app-0.0.1
-PyYAML==3.13
+PyYAML==5.4
 requests==2.21.0
 six==1.12.0
 soupsieve==1.7.3
